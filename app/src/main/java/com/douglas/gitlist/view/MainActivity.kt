@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     private var progressBar: ProgressBar?=null
     private var tvErrorNetwork: AppCompatTextView?=null
     private var btnErrorNetwork: AppCompatButton?=null
+    private var ivErro: AppCompatImageView?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
         progressBar = findViewById(R.id.progressBar)
         tvErrorNetwork = findViewById(R.id.tvErrorNetwork)
         btnErrorNetwork = findViewById(R.id.btnErrorNetwork)
+        ivErro = findViewById(R.id.ivErro)
     }
 
     override fun showProgressBar() {
@@ -50,11 +53,13 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     override fun showErrorNetwork() {
         tvErrorNetwork!!.visibility = View.VISIBLE
         btnErrorNetwork!!.visibility = View.VISIBLE
+        ivErro!!.visibility = View.VISIBLE
     }
 
     override fun hideErrorNetwork() {
         tvErrorNetwork!!.visibility = View.GONE
         btnErrorNetwork!!.visibility = View.GONE
+        ivErro!!.visibility = View.GONE
     }
 
     override fun setAdapter(adapter: RepositoriesAdapter) {

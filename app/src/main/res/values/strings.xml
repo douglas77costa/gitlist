@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GitList</string>
     <string name="repositorios">GitList Repositórios</string>
-    <string name="erro_network">Eita! \n \n Houve um erro ao buscar os dados...</string>
+    <string name="erro_network">Erro ao buscar os dados.</string>
     <string name="tentar_novamente">Tentar Novamente</string>
 
 </resources>
