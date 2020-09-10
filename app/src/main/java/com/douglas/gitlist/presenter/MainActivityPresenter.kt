@@ -16,34 +16,38 @@ class MainActivityPresenter(view: View,context: Context) {
     private var context:Context?=null
 
     fun getRepositories() {
-        view?.showProgressBar();
-        view?.hideErrorNetwork();
-        val retrofitClient = RetrofitUtils
-            .getRetrofitInstance(Constants.GIT_BASE_URL)
+        try {
+            view?.showProgressBar()
+            view?.hideErrorNetwork()
+            val retrofitClient = RetrofitUtils
+                .getRetrofitInstance(Constants.GIT_BASE_URL)
 
-        val endpoint = retrofitClient.create(Endpoint::class.java)
-        val callback = endpoint.getRepositories()
+            val endpoint = retrofitClient.create(Endpoint::class.java)
+            val callback = endpoint.getRepositories()
 
-        callback.enqueue(object : Callback<List<RepositoryEntity>> {
-            override fun onFailure(call: Call<List<RepositoryEntity>>, t: Throwable) {
-                view?.hideProgressBar();
-                view?.showErrorNetwork()
-            }
-
-            override fun onResponse(
-                call: Call<List<RepositoryEntity>>,
-                response: Response<List<RepositoryEntity>>
-            ) {
-                if (response.code()==200){
-                    val listRepositoryEntity = response.body()
-                    val adapter = RepositoriesAdapter(listRepositoryEntity!!,context!!);
-                    view?.setAdapter(adapter)
-                }else{
+            callback.enqueue(object : Callback<List<RepositoryEntity>> {
+                override fun onFailure(call: Call<List<RepositoryEntity>>, t: Throwable) {
+                    view?.hideProgressBar();
                     view?.showErrorNetwork()
                 }
-                view?.hideProgressBar();
-            }
-        })
+
+                override fun onResponse(
+                    call: Call<List<RepositoryEntity>>,
+                    response: Response<List<RepositoryEntity>>
+                ) {
+                    if (response.code()==200){
+                        val listRepositoryEntity = response.body()
+                        val adapter = RepositoriesAdapter(listRepositoryEntity!!,context!!)
+                        view?.setAdapter(adapter)
+                    }else{
+                        view?.showErrorNetwork()
+                    }
+                    view?.hideProgressBar();
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
     }
 

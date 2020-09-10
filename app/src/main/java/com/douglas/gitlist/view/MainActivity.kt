@@ -1,9 +1,10 @@
 package com.douglas.gitlist.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.douglas.gitlist.R
 import com.douglas.gitlist.adapter.RepositoriesAdapter
 import com.douglas.gitlist.presenter.MainActivityPresenter
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter = MainActivityPresenter(this,this)
+        presenter = MainActivityPresenter(this, this)
         initViews()
         presenter!!.getRepositories()
         btnErrorNetwork!!.setOnClickListener {
