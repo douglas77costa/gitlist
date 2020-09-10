@@ -15,7 +15,7 @@ class MainActivityPresenter(view: View,context: Context) {
     private var repositoryEntity: RepositoryEntity? = null
     private var context:Context?=null
 
-    fun getRepositories() {
+    fun getDataRepositories() {
         try {
             view?.showProgressBar()
             view?.hideErrorNetwork()
@@ -35,6 +35,7 @@ class MainActivityPresenter(view: View,context: Context) {
                     call: Call<List<RepositoryEntity>>,
                     response: Response<List<RepositoryEntity>>
                 ) {
+                    view?.hideProgressBar();
                     if (response.code()==200){
                         val listRepositoryEntity = response.body()
                         val adapter = RepositoriesAdapter(listRepositoryEntity!!,context!!)
@@ -42,7 +43,6 @@ class MainActivityPresenter(view: View,context: Context) {
                     }else{
                         view?.showErrorNetwork()
                     }
-                    view?.hideProgressBar();
                 }
             })
         } catch (e: Exception) {

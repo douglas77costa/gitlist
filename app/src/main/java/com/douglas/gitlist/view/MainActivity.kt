@@ -1,6 +1,5 @@
 package com.douglas.gitlist.view
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
@@ -28,9 +27,9 @@ class MainActivity : AppCompatActivity(), MainActivityPresenter.View {
         setContentView(R.layout.activity_main)
         presenter = MainActivityPresenter(this, this)
         initViews()
-        presenter!!.getRepositories()
+        presenter!!.getDataRepositories()
         btnErrorNetwork!!.setOnClickListener {
-            presenter!!.getRepositories()
+            presenter!!.getDataRepositories()
         }
     }
 

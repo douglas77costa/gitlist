@@ -31,12 +31,12 @@ class RepositoriesAdapter(
         val repositoryEntity = listRepositoryEntity[position]
         holder.tvTitleRepo?.text = repositoryEntity.name
         holder.tvUser?.text = repositoryEntity.owner?.login
-        holder?.ivAvatar?.let {
+        holder.ivAvatar?.let {
             Glide.with(context).load(repositoryEntity.owner?.avatarUrl).apply(RequestOptions.circleCropTransform()).into(
                 it
             )
         };
-        holder?.ivLink?.setOnClickListener {
+        holder.ivLink?.setOnClickListener {
             val openURL = Intent(Intent.ACTION_VIEW)
             openURL.data = Uri.parse( repositoryEntity.htmlUrl)
             context.startActivity(openURL)
